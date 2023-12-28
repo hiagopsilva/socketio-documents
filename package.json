@@ -21,6 +21,7 @@
   "homepage": "https://github.com/alura-cursos/alura-docs#readme",
   "dependencies": {
     "express": "4",
+    "mongodb": "4.11",
     "socket.io": "4"
   },
   "devDependencies": {
