@@ -1,6 +1,6 @@
 import io from './server.js'
 
-import {findDocument, updateDocument, getDocuments, addDocument} from './documentDb.js'
+import {findDocument, updateDocument, getDocuments, addDocument, deleteDocument} from './documentDb.js'
 
 io.on('connection', socket => {
   console.log(`Socket conectado: ${socket.id}`)
@@ -47,6 +47,14 @@ io.on('connection', socket => {
     if (document.modifiedCount) {
       document.text = text
       socket.to(documentName).emit('text_editor_clients', text)
+    }
+  })
+
+  socket.on('delete_document', async (documentName) => {
+    const deletedDocument = await deleteDocument(documentName)
+
+    if (deletedDocument.deletedCount) {
+      io.emit('delete_document_sucess', documentName)
     }
   })
 })

@@ -1,10 +1,11 @@
-import { emitTextEditor, SelectDocument } from './socket-front-document.js'
+import { emitTextEditor, SelectDocument, emitDeleteDocument } from './socket-front-document.js'
 
 const paramsURL = new URLSearchParams(window.location.search)
 const documentName = paramsURL.get("nome")
 
 const textEditor = document.getElementById('editor-texto')
 const titleDocument = document.getElementById('titulo-documento')
+const buttonDelete = document.getElementById('excluir-documento')
 
 titleDocument.textContent = documentName || 'Documento sem título'
 
@@ -14,9 +15,19 @@ textEditor.addEventListener('keyup', () => {
   emitTextEditor({text: textEditor.value, documentName})
 })
 
+buttonDelete.addEventListener('click', () => {
+  console.log({documentName})
+  emitDeleteDocument(documentName)
+})
+ 
 function updateTextEditor(text) {
   textEditor.value = text
 }
 
+function alertRedirect(text) {
+  alert(`O documento ${text} foi excluído.`)
 
-export {updateTextEditor}
+  window.location.href = '/'
+}
+
+export {updateTextEditor, alertRedirect}
