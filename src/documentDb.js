@@ -7,6 +7,12 @@ function getDocuments() {
 
 }
 
+function addDocument(name) {
+  const result = documentsCollection.insertOne({name, text: ''})
+
+  return result
+}
+
 function findDocument(documentName) {
   const document = documentsCollection.findOne({name: documentName})
 
@@ -21,4 +27,4 @@ function updateDocument(documentName, text) {
   return updateDocument
 }
 
-export { findDocument, updateDocument, getDocuments }
+export { findDocument, updateDocument, getDocuments, addDocument }

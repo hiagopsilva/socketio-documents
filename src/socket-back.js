@@ -1,6 +1,6 @@
 import io from './server.js'
 
-import {findDocument, updateDocument, getDocuments} from './documentDb.js'
+import {findDocument, updateDocument, getDocuments, addDocument} from './documentDb.js'
 
 io.on('connection', socket => {
   console.log(`Socket conectado: ${socket.id}`)
@@ -15,6 +15,14 @@ io.on('connection', socket => {
   //   console.log(`Cliente "${socket.id}" desconectado!
   //   Motivo: ${motivo}`);
   // });
+
+  socket.on('add_document', async (name) => {
+    const result = await addDocument(name)
+
+    if (result.acknowledged) {
+      io.emit('insert_document_interface', name)
+    }
+  })
 
   socket.on('select_document', async (documentName, returnTextDocument) => {
     socket.join(documentName)

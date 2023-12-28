@@ -1,6 +1,14 @@
-import './socket-front-index.js'
+import {emitAddDocument} from './socket-front-index.js'
 
 const listDocuments = document.getElementById('lista-documentos')
+const form = document.getElementById('form-adiciona-documento')
+const inputDocument = document.getElementById('input-documento')
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault()
+  emitAddDocument(inputDocument.value)
+  inputDocument.value = '';
+})
 
 function insertLinkDocument(documentName) {
   listDocuments.innerHTML += `

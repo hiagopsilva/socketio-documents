@@ -8,3 +8,13 @@ socket.emit('get_documents', (documents) => {
     insertLinkDocument(document.name)
   })
 })
+
+socket.on('insert_document_interface', (name) => {
+  insertLinkDocument(name)
+})
+
+function emitAddDocument(name) {
+  socket.emit('add_document', name)
+}
+
+export { emitAddDocument }
