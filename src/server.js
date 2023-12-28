@@ -21,6 +21,4 @@ serverHttp.listen(port, () => {
 
 const io = new Server(serverHttp)
 
-io.on('connection', socket => {
-  console.log(`Socket conectado: ${socket.id}`)
-})
+export default io
