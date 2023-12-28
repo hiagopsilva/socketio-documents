@@ -12,7 +12,7 @@ io.on('connection', socket => {
     socket.join(documentName)
   })
 
-  socket.on('text_editor', (text, documentName) => {
+  socket.on('text_editor', ({text, documentName}) => {
     // socket.broadcast.emit('text_editor_clients', text)
     socket.to(documentName).emit('text_editor_clients', text)
   })

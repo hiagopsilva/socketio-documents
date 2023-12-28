@@ -1,17 +1,17 @@
 import { emitTextEditor, SelectDocument } from './socket-front-document.js'
 
 const paramsURL = new URLSearchParams(window.location.search)
-const paramsDocumentName = paramsURL.get("nome")
+const documentName = paramsURL.get("nome")
 
 const textEditor = document.getElementById('editor-texto')
 const titleDocument = document.getElementById('titulo-documento')
 
-titleDocument.textContent = paramsDocumentName || 'Documento sem título'
+titleDocument.textContent = documentName || 'Documento sem título'
 
-SelectDocument(paramsDocumentName)
+SelectDocument(documentName)
 
 textEditor.addEventListener('keyup', () => {
-  emitTextEditor(textEditor.value, paramsDocumentName)
+  emitTextEditor({text: textEditor.value, documentName})
 })
 
 function updateTextEditor(text) {
