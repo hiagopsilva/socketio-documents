@@ -24,10 +24,11 @@ function updateTextEditor(text) {
   textEditor.value = text
 }
 
-function alertRedirect(text) {
-  alert(`O documento ${text} foi excluído.`)
-
-  window.location.href = '/'
+function alertRedirect(name) {
+  if (name === documentName) {
+    alert(`O documento ${name} foi excluído.`)
+    window.location.href = '/'
+  }
 }
 
 export {updateTextEditor, alertRedirect}
