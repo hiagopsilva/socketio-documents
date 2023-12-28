@@ -10,13 +10,11 @@ io.on('connection', socket => {
 
   socket.on('select_document', documentName => {
     socket.join(documentName)
-    console.log(`document: ${documentName}`)
   })
 
-  socket.on('text_editor', text => {
+  socket.on('text_editor', (text, documentName) => {
     // socket.broadcast.emit('text_editor_clients', text)
-    socket.to('JavaScript').emit('text_editor_clients', text)
-    console.log(`Texto: ${text}`)
+    socket.to(documentName).emit('text_editor_clients', text)
   })
 })
 

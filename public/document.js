@@ -11,7 +11,7 @@ titleDocument.textContent = paramsDocumentName || 'Documento sem título'
 SelectDocument(paramsDocumentName)
 
 textEditor.addEventListener('keyup', () => {
-  emitTextEditor(textEditor.value)
+  emitTextEditor(textEditor.value, paramsDocumentName)
 })
 
 function updateTextEditor(text) {

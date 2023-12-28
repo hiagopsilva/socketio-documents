@@ -6,8 +6,8 @@ function SelectDocument(paramsDocumentName) {
   socket.emit('select_document', paramsDocumentName)
 }
 
-function emitTextEditor(text) {
-  socket.emit('text_editor', text)
+function emitTextEditor(text, documentName) {
+  socket.emit('text_editor', text, documentName)
 }
 
 socket.on('text_editor_clients', text => {
