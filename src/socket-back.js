@@ -1,19 +1,6 @@
 import io from './server.js'
 
-const documents = [
-  {
-    name: "JavaScript",
-    text: "Texto JavaScript"
-  },
-  {
-    name: "Node",
-    text: "Texto Node"
-  },
-  {
-    name: "Socket.io",
-    text: "Texto Socket.io"
-  },
-]
+import {documentsCollection} from './db-connect.js'
 
 io.on('connection', socket => {
   console.log(`Socket conectado: ${socket.id}`)
@@ -23,18 +10,20 @@ io.on('connection', socket => {
   //   Motivo: ${motivo}`);
   // });
 
-  socket.on('select_document', (documentName, returnTextDocument) => {
+  socket.on('select_document', async (documentName, returnTextDocument) => {
     socket.join(documentName)
 
-    const document = findDocument(documentName)
+    const document = await findDocument(documentName)
+
+    console.log({document})
 
     if (document) {
       returnTextDocument(document.text)
     }
   })
 
-  socket.on('text_editor', ({text, documentName}) => {
-    const document = findDocument(documentName)
+  socket.on('text_editor', async ({text, documentName}) => {
+    const document = await findDocument(documentName)
 
     if (document) {
       document.text = text
@@ -45,7 +34,7 @@ io.on('connection', socket => {
 
 
 function findDocument(documentName) {
-  const document = documents.find(document => document.name === documentName)
+  const document = documentsCollection.findOne({name: documentName})
 
   return document
 }
