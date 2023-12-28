@@ -54,7 +54,7 @@ io.on('connection', socket => {
     const deletedDocument = await deleteDocument(documentName)
 
     if (deletedDocument.deletedCount) {
-      io.emit('delete_document_sucess', documentName)
+      io.emit('delete_document_success', documentName)
     }
   })
 })

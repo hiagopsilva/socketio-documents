@@ -20,7 +20,7 @@ function emitDeleteDocument(documentName) {
   socket.emit('delete_document', documentName)
 }
 
-socket.on('delete_document_sucess', documentName => {
+socket.on('delete_document_success', documentName => {
   alertRedirect(documentName)
 })
 

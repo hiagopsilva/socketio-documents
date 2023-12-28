@@ -1,4 +1,4 @@
-import { insertLinkDocument } from './index.js'
+import { insertLinkDocument, removerLinkDocument } from './index.js'
 
 const socket = io();
 
@@ -15,6 +15,11 @@ socket.on('insert_document_interface', (name) => {
 
 socket.on('document_exists', (name) => {
   alert(`O documento ${name} já existe`)
+})
+
+
+socket.on('delete_document_success', (name) => {
+  removerLinkDocument(name)
 })
 
 function emitAddDocument(name) {
