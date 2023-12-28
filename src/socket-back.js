@@ -1,6 +1,6 @@
 import io from './server.js'
 
-import {documentsCollection} from './db-connect.js'
+import {findDocument, updateDocument} from './documentDb.js'
 
 io.on('connection', socket => {
   console.log(`Socket conectado: ${socket.id}`)
@@ -15,17 +15,15 @@ io.on('connection', socket => {
 
     const document = await findDocument(documentName)
 
-    console.log({document})
-
     if (document) {
       returnTextDocument(document.text)
     }
   })
 
   socket.on('text_editor', async ({text, documentName}) => {
-    const document = await findDocument(documentName)
+    const document = await updateDocument(documentName, text)
 
-    if (document) {
+    if (document.modifiedCount) {
       document.text = text
       socket.to(documentName).emit('text_editor_clients', text)
     }
@@ -33,9 +31,4 @@ io.on('connection', socket => {
 })
 
 
-function findDocument(documentName) {
-  const document = documentsCollection.findOne({name: documentName})
-
-  return document
-}
 
