@@ -7,4 +7,9 @@ io.on('connection', socket => {
     socket.broadcast.emit('text_editor_clients', text)
     console.log(`Texto: ${text}`)
   })
+
+  socket.on("disconnect", (motivo) => {
+    console.log(`Cliente "${socket.id}" desconectado!
+    Motivo: ${motivo}`);
+  });
 })
