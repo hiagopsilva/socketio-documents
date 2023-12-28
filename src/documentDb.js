@@ -1,5 +1,11 @@
 import {documentsCollection} from './db-connect.js'
 
+function getDocuments() {
+  const documents = documentsCollection.find().toArray()
+
+  return documents
+
+}
 
 function findDocument(documentName) {
   const document = documentsCollection.findOne({name: documentName})
@@ -15,4 +21,4 @@ function updateDocument(documentName, text) {
   return updateDocument
 }
 
-export { findDocument, updateDocument }
+export { findDocument, updateDocument, getDocuments }
