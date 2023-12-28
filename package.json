@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/alura-cursos/alura-docs#readme",
   "dependencies": {
-    "express": "4"
+    "express": "4",
+    "socket.io": "4"
   },
   "devDependencies": {
     "nodemon": "2"
