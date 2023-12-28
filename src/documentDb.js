@@ -30,8 +30,6 @@ function updateDocument(documentName, text) {
 function deleteDocument(documentName) {
   const result = documentsCollection.deleteOne({name: documentName})
 
-  console.log({DELETE: result, documentName})
-
   return result
 }
 

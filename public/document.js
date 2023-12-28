@@ -16,7 +16,6 @@ textEditor.addEventListener('keyup', () => {
 })
 
 buttonDelete.addEventListener('click', () => {
-  console.log({documentName})
   emitDeleteDocument(documentName)
 })
  

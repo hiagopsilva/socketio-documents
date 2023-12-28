@@ -6,15 +6,10 @@ io.on('connection', socket => {
   console.log(`Socket conectado: ${socket.id}`)
 
   socket.on('get_documents', async (setDocuments) => {
-    console.log('get_documents')
     const document = await getDocuments()
 
     setDocuments(document)
   })
-  // socket.on("disconnect", (motivo) => {
-  //   console.log(`Cliente "${socket.id}" desconectado!
-  //   Motivo: ${motivo}`);
-  // });
 
   socket.on('add_document', async (name) => {
     const documentExists = (await findDocument(name)) !== null
